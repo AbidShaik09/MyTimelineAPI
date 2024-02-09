@@ -48,15 +48,31 @@ namespace MyTimeline.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDetails login)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == login.Email);
+            var user = await _db.Users.Include(e => e.Tasks).Include(x => x.TimeSlots).FirstOrDefaultAsync(u => u.Email == login.Email);
 
             // Check if the user exists and the password is correct
             if (user == null || user.Password != ComputeSha256Hash(login.Password))
             {
                 return Unauthorized();
             }
+            user.Password = "*****";
+            return Ok(user);
+        }
 
-            return Ok("");
+
+        // POST: api/auth/login
+        [HttpPost("login/Username")]
+        public async Task<IActionResult> LoginUsername([FromBody] LoginDetailsUsername login)
+        {
+            var user = await _db.Users.Include(e => e.Tasks).Include(x => x.TimeSlots).FirstOrDefaultAsync(u => u.Username == login.Username);
+
+            // Check if the user exists and the password is correct
+            if (user == null || user.Password != ComputeSha256Hash(login.Password))
+            {
+                return Unauthorized();
+            }
+            user.Password = "*****";
+            return Ok(user);
         }
 
         // A simple SHA256 hash function for password hashing
@@ -80,6 +96,12 @@ namespace MyTimeline.Controllers
             public string Email { get; set; }
             public string Password { get; set; }
         }
+        public class LoginDetailsUsername
+        {
+            public string Username { get; set; }
+            public string Password { get; set; }
+        }
+
 
 
 

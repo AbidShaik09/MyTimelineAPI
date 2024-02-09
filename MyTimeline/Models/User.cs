@@ -16,6 +16,11 @@ namespace MyTimeline.Models
         public string Email { get; set; }
         [Required]
         public string Name { get; set; }
+
+        DateTime Created { get; set; }= DateTime.UtcNow;
+
+
+
         [JsonIgnore]
         public ICollection<Task> Tasks { get; set; } = new List<Task>(); // Navigation property
         [JsonIgnore]
@@ -27,11 +32,17 @@ namespace MyTimeline.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; } // Active, Passive, Casual, Urgent
-        public int Priority { get; set; } // Urgent: 4, Active: 3, Passive: 2, Casual: 1
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public bool IsFlexible { get; set; }
+        public int Priority { get; set; } = 3; // Urgent: 4, Active: 3, Passive: 2, Casual: 1
+
+        
+        public DateTime StartTime { get; set; }=DateTime.UtcNow;
+        
+        public DateTime EndTime { get; set; }=DateTime.UtcNow.AddHours(1);
+        public bool IsFlexible { get; set; }=false;
+
+        public bool IsCompleted { get; set; } = false;
+ 
+        public bool Missed { get; set; } = false;
         [Required]
         public int UserId { get; set; } // Foreign Key
         
@@ -43,12 +54,15 @@ namespace MyTimeline.Models
     {
         [Key]
         public int Id { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public string Status { get; set; } // Free, Busy
+        
+        public DateTime StartTime { get; set; } = DateTime.UtcNow.Date;
+        
+        public DateTime EndTime { get; set; } = DateTime.UtcNow.AddDays(1);
+        
+        public string Status { get; set; } = "Free"; // Free, Busy
         [Required]
         public int UserId { get; set; } // Foreign Key
-
+        [JsonIgnore]
         public ICollection<Task> Tasks { get; set; } = new List<Task>(); // Navigation property
 
 

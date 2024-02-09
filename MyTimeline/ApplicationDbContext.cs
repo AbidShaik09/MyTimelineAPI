@@ -21,7 +21,7 @@ namespace MyTimeline
                 .WithOne()
                 .HasForeignKey(ts => ts.UserId)
                 .IsRequired();
-        }
+        }    
         public DbSet<User> Users { get; set; }
     }
 

@@ -134,3 +134,4 @@ C:\Users\Aamir\source\repos\MyTimeline\MyTimeline\obj\Debug\net8.0\refint\MyTime
 C:\Users\Aamir\source\repos\MyTimeline\MyTimeline\obj\Debug\net8.0\MyTimeline.pdb
 C:\Users\Aamir\source\repos\MyTimeline\MyTimeline\obj\Debug\net8.0\MyTimeline.genruntimeconfig.cache
 C:\Users\Aamir\source\repos\MyTimeline\MyTimeline\obj\Debug\net8.0\ref\MyTimeline.dll
+C:\Users\Aamir\source\repos\MyTimeline\MyTimeline\obj\Debug\net8.0\MyTimeline.sourcelink.json
